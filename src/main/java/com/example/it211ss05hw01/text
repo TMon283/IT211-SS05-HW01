@@ -1,0 +1,45 @@
+1. REST yêu cầu dùng danh từ (số nhiều) cho đường dẫn (URL), không dùng động từ là đúng
+-> 2 ví dụ đúng: POST /students, GET /students/1
+-> 2 ví dụ sai: GET /getStudent, POST /addStudent
+
+2. Các phương thức HTTP:
+- GET:
+    + Mục đích chính: Lấy dữ liệu
+    + Không có body
+- POST:
+    + Mục đích chính: Tạo mới
+    + Có body
+- PUT:
+    + Mục đích chính: Cập nhật toàn bộ
+    + Có body
+- PATCH:
+    + Mục đích chính: Cập nhật một phần
+    + Có body
+- DELETE:
+    + Mục đích chính: Xóa dữ liệu
+    + Không có body
+
+3. Giả sử có một sản phẩm: { "id": 1, "name": "Bút bi", "price": 5000 }
+- Nếu dùng PUT /products/1 với body { "name": "Bút mực" } thì sản phẩm sau khi cập nhật sẽ bị mất trường price
+- Nếu dùng PATCH /products/1 với cùng body đó thì kết quả sẽ là { "id": 1, "name": "Bút mực", "price": 5000 }
+-> PUT thay thế toàn bộ tài nguyên, PATCH chỉ cập nhật một phần
+
+4. Mã trạng thái HTTP
+- 200
+    + Ý nghĩa: Thành công
+    + Ví dụ: GET /students -> trả về danh sách sinh viên
+- 201
+    + Ý nghĩa: Tạo mới thành công
+    + Ví dụ: POST /students -> thêm sinh viên
+- 204
+    + Ý nghĩa: Thành công, không có nội dung
+    + Ví dụ: DELETE /students/1 -> xóa sinh viên có id=1
+- 400
+    + Ý nghĩa: Yêu cầu sai
+    + Ví dụ: Gửi dữ liệu thiếu trường bắt buộc
+- 404
+    + Ý nghĩa: Không tìm thấy
+    + Ví dụ: GET /students/999 khi ID không tồn tại
+- 500
+    + Ý nghĩa: Lỗi server
+    + Ví dụ: Lỗi logic trong service hoặc DB có vấn đề
